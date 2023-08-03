@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import EmployeeService from '../services/EmployeeService';
 
 const ListEmployeeComponent = () => {
     const [employees, setEmployees] = useState([]);
+
+    useEffect(() => {
+        EmployeeService.getAllEmployees()
+            .then((response) => {
+                setEmployees(response.data);
+                console.log(response.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
 
     return (
         <div className="container">
