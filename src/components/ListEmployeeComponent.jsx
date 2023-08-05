@@ -9,7 +9,7 @@ const ListEmployeeComponent = () => {
         EmployeeService.getAllEmployees()
             .then((response) => {
                 setEmployees(response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -29,6 +29,7 @@ const ListEmployeeComponent = () => {
                         <th>Employee First Name</th>
                         <th>Employee Last Name</th>
                         <th>Employee Email Id</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +39,11 @@ const ListEmployeeComponent = () => {
                             <td>{employee.firstName}</td>
                             <td>{employee.lastName}</td>
                             <td>{employee.emailId}</td>
+                            <td>
+                                <Link className="btn btn-info" to={`/edit-employee/${employee.id}`}>
+                                    Update
+                                </Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

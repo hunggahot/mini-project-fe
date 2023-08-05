@@ -1,8 +1,6 @@
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import EmployeeService from '../services/EmployeeService';
-import { Link } from 'react-router-dom';
 
 const AddEmployeeComponent = () => {
     const [firstName, setFirstName] = useState('');
@@ -10,6 +8,7 @@ const AddEmployeeComponent = () => {
     const [emailId, setEmailId] = useState('');
 
     const navigate = useNavigate();
+    const { id } = useParams();
 
     const saveEmployee = (e) => {
         e.preventDefault();
@@ -18,13 +17,32 @@ const AddEmployeeComponent = () => {
 
         EmployeeService.createEmployee(employee)
             .then((response) => {
-                console.log(response.data);
-
+                // console.log(response.data);
                 navigate('/employees');
             })
             .catch((err) => {
                 console.log(err);
             });
+    };
+
+    useEffect(() => {
+        EmployeeService.getEmployeeById(id)
+            .then((response) => {
+                setFirstName(response.data.firstName);
+                setLastName(response.data.lastName);
+                setEmailId(response.data.emailId);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+    const title = () => {
+        if (id) {
+            return <h2 className="text-center">Update Employee</h2>;
+        } else {
+            return <h2 className="text-center">Add Employee</h2>;
+        }
     };
 
     return (
@@ -33,7 +51,7 @@ const AddEmployeeComponent = () => {
             <div className="container">
                 <div className="row">
                     <div className="card col-md-6 offset-md-3 offset-md-3">
-                        <h2 className="text-center">Add Employee</h2>
+                        {title()}
                         <div className="card-body">
                             <form>
                                 <div className="form-group mb-2">
