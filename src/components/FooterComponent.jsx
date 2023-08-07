@@ -4,7 +4,7 @@ import { currentYear } from '../utils/time';
 const FooterComponent = () => {
     return (
         <div>
-            <footer className="footer">
+            <footer className="footer bg-blue">
                 <span className="text-muted">&copy; {currentYear} CopyRight Example. All rights reserved</span>
             </footer>
         </div>

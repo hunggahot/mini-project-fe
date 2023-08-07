@@ -22,7 +22,7 @@ const ListEmployeeComponent = () => {
 
     const deleteEmployee = (employeeId) => {
         EmployeeService.deleteEmployee(employeeId)
-            .then((response) => {
+            .then(() => {
                 getAllEmployees();
             })
             .catch((err) => {

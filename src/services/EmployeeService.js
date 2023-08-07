@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const EMPLOYEE_BASE_REST_API_URL = 'http://localhost:8080/api/v1/employees';
+const EMPLOYEE_BASE_REST_API_URL =
+    'http://miniproject-env.eba-4m29msi8.ap-southeast-2.elasticbeanstalk.com/api/v1/employees';
 
 class EmployeeService {
     getAllEmployees() {

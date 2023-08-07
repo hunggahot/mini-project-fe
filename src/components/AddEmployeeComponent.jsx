@@ -17,7 +17,7 @@ const AddEmployeeComponent = () => {
 
         if (id) {
             EmployeeService.updateEmployee(id, employee)
-                .then((response) => {
+                .then(() => {
                     navigate('/employees');
                 })
                 .catch((err) => {
@@ -25,8 +25,7 @@ const AddEmployeeComponent = () => {
                 });
         } else {
             EmployeeService.createEmployee(employee)
-                .then((response) => {
-                    // console.log(response.data);
+                .then(() => {
                     navigate('/employees');
                 })
                 .catch((err) => {
@@ -36,6 +35,10 @@ const AddEmployeeComponent = () => {
     };
 
     useEffect(() => {
+        getEmployeeById();
+    }, []);
+
+    const getEmployeeById = () => {
         EmployeeService.getEmployeeById(id)
             .then((response) => {
                 setFirstName(response.data.firstName);
@@ -45,7 +48,7 @@ const AddEmployeeComponent = () => {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    };
 
     const title = () => {
         if (id) {
